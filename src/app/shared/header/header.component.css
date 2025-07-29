@@ -1,0 +1,36 @@
+.header {
+  color: black;
+  padding: 1.5rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+
+.header-info {
+  text-align: right;
+}
+
+.current-date {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}

@@ -1,22 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Task } from '../../models/task';
+import { TaskComponent } from '../task/task.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-tasklist',
   templateUrl: './tasklist.component.html',
   styleUrls: ['./tasklist.component.css'],
+
+  imports: [TaskComponent, CommonModule, FormsModule],
 })
 export class TasklistComponent {
-  tasks = [
-    { id: 1, title: 'Buy groceries' },
-    { id: 2, title: 'Learn Angular' },
-    { id: 3, title: 'Walk the dog' },
-  ];
+  @Input() tasks: Task[] = [];
+  @Output() deleteTask = new EventEmitter<number>();
+  @Output() toggleTask = new EventEmitter<number>();
+  @Output() addTask = new EventEmitter<Omit<Task, 'id' | 'createdDate'>>();
 
-  addTask(title: string) {
-    if (!title) return;
-    this.tasks.push({ id: Date.now(), title });
+  newTask = {
+    title: '',
+    description: '',
+    completed: false,
+  };
+
+  trackByTaskId(index: number, task: Task): number {
+    return task.id;
   }
 
-  handleDelete(id: number) {
-    this.tasks = this.tasks.filter((task) => task.id !== id);
+  onDeleteTask(taskId: number): void {
+    this.deleteTask.emit(taskId);
+  }
+
+  onToggleTask(taskId: number): void {
+    this.toggleTask.emit(taskId);
+  }
+
+  onSubmit(): void {
+    if (this.newTask.title.trim() && this.newTask.description.trim()) {
+      this.addTask.emit({ ...this.newTask });
+      this.newTask = { title: '', description: '', completed: false };
+    }
   }
 }

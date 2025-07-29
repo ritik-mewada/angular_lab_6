@@ -1,3 +1,12 @@
-<app-header></app-header>
-<app-tasklist></app-tasklist>
-<app-footer></app-footer>
+<div class="home-container">
+  <div class="welcome-section">
+    <h1>Welcome to Task Manager</h1>
+  </div>
+
+  <app-tasklist
+    [tasks]="tasks"
+    (addTask)="addTask($event)"
+    (deleteTask)="deleteTask($event)"
+    (toggleTask)="toggleTask($event)"
+  ></app-tasklist>
+</div>

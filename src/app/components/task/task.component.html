@@ -1,5 +1,20 @@
-<div class="task-item">
-  <img src="assets/task-icon.png" alt="Task Icon" />
-  <span>{{ task.title }}</span>
-  <button (click)="deleteTask()">Delete</button>
+<div class="task-card" [class.completed]="task.completed">
+  <div class="task-header">
+    <h3>{{ task.title }}</h3>
+    <div class="task-actions">
+      <button class="btn btn-toggle" (click)="onToggle()">
+        {{ task.completed ? "Undo" : "Complete" }}
+      </button>
+      <button class="btn btn-delete" (click)="onDelete()">Delete</button>
+    </div>
+  </div>
+  <p class="task-description">{{ task.description }}</p>
+  <div class="task-footer">
+    <span class="task-date"
+      >Created: {{ task.createdDate | date : "shortDate" }}</span
+    >
+    <span class="task-status" [class.status-completed]="task.completed">
+      {{ task.completed ? "Completed" : "Pending" }}
+    </span>
+  </div>
 </div>
